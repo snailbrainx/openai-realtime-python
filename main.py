@@ -48,7 +48,7 @@ def select_audio_devices():
             print("Invalid input. Please enter a valid index.")
 
     # Voice selection
-    voices = ['allison', 'allison-int', 'cris', 'harriet', 'jade', 'jade-int', 'mario', 'mario-int', 'samantha', 'stephanie', 'stephanie-int', 'victor']  # Update with actual voice options
+    voices = ['alloy', 'echo', 'shimmer']  # Update with actual voice options
     print("\nAvailable Voices:")
     for idx, voice in enumerate(voices):
         print(f"{idx}: {voice}")
