@@ -14,8 +14,8 @@ def list_audio_devices():
 class AudioRecorder:
     """Class to handle audio recording from the microphone."""
 
-    def __init__(self, input_device_name, samplerate=24000, block_duration=0.25):
-        self.input_device_name = input_device_name
+    def __init__(self, input_device_index, samplerate=24000, block_duration=0.25):
+        self.input_device_index = input_device_index
         self.samplerate = samplerate  # Fixed to 24kHz as required by OpenAI Realtime API
         self.blocksize = int(samplerate * block_duration)  # 0.25-second blocks
         self.channels = 1
@@ -31,7 +31,7 @@ class AudioRecorder:
     def record_audio(self):
         """Generator function to record audio chunks from the microphone."""
         with sd.InputStream(
-            device=self.input_device_name,
+            device=self.input_device_index,
             channels=self.channels,
             samplerate=self.samplerate,
             dtype=self.dtype,
@@ -60,8 +60,8 @@ def decode_audio_chunk(encoded_audio):
 class AudioPlayer:
     """Class to handle audio playback to the speaker."""
 
-    def __init__(self, output_device_name):
-        self.output_device_name = output_device_name
+    def __init__(self, output_device_index):
+        self.output_device_index = output_device_index
         self.samplerate = 24000  # Fixed to 24kHz
         self.channels = 1
         self.buffer = np.array([], dtype='int16')
@@ -79,7 +79,7 @@ class AudioPlayer:
         self.stream = sd.OutputStream(
             samplerate=self.samplerate,
             blocksize=1024,
-            device=self.output_device_name,
+            device=self.output_device_index,
             channels=self.channels,
             dtype='int16',
             callback=self._callback,

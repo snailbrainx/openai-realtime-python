@@ -28,15 +28,15 @@ def select_audio_devices():
 
     print("\nAvailable Input Devices:")
     for idx, dev in enumerate(input_devices):
-        print(f"{idx}: {dev['name']}")
+        print(f"{idx}: {dev['name']} (Index {dev['index']})")
 
-    selected_input_device = input_devices[_select_device(len(input_devices), "Input")]['name']
+    selected_input_device = input_devices[_select_device(len(input_devices), "Input")]['index']
 
     print("\nAvailable Output Devices:")
     for idx, dev in enumerate(output_devices):
-        print(f"{idx}: {dev['name']}")
+        print(f"{idx}: {dev['name']} (Index {dev['index']})")
 
-    selected_output_device = output_devices[_select_device(len(output_devices), "Output")]['name']
+    selected_output_device = output_devices[_select_device(len(output_devices), "Output")]['index']
 
     # Voice selection
     voices = ['alloy', 'echo', 'shimmer']  # Update with actual voice options
@@ -47,8 +47,8 @@ def select_audio_devices():
     selected_voice = voices[_select_device(len(voices), "Voice")]
 
     settings = {
-        'input_device': selected_input_device,
-        'output_device': selected_output_device,
+        'input_device': selected_input_device,   # This should be the device index
+        'output_device': selected_output_device, # This should be the device index
         'voice': selected_voice
     }
     save_settings(settings)
